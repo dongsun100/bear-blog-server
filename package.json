@@ -1,13 +1,13 @@
 {
   "name": "bear-blog",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "server.ts",
   "license": "MIT",
   "scripts": {
-    "dev": "NODE_ENV=development nodemon -e js,ts,json --ignore dist/ --exec 'yarn build && yarn start'",
-    "start": "node ./dist/server.js",
-    "build": "tsc -p .",
-    "prisma:studio": "npx prisma studio"
+    "prisma:studio": "npx prisma studio",
+    "dev": "NODE_ENV=development nodemon --watch src --delay 1 --exec 'ts-node' src/server.ts",
+    "build": "webpack --config webpack.config.js --env mode=production",
+    "start": "node dist/server.js"
   },
   "dependencies": {
     "@graphql-tools/schema": "^10.0.2",
@@ -29,11 +29,16 @@
     "@types/morgan": "^1.9.9",
     "@types/node": "^20.10.1",
     "dotenv": "^16.3.1",
-    "nodemon": "^3.0.1",
+    "dotenv-webpack": "^8.0.1",
+    "nodemon": "^3.0.2",
     "prisma": "^5.6.0",
+    "ts-loader": "^9.5.1",
     "ts-node": "^10.9.1",
     "tsconfig-paths": "^4.2.0",
     "tscpaths": "^0.0.9",
-    "typescript": "^5.3.2"
+    "typescript": "^5.3.2",
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-node-externals": "^3.0.0"
   }
 }

@@ -2,8 +2,8 @@
   "compilerOptions": {
     "target": "es6",
     "module": "commonjs",
-    "lib": ["esnext", "dom", "es6"],
-    "outDir": "dist",
+    "lib": ["esnext", "es6"],
+    "outDir": "./dist",
     "rootDir": "src",
     "moduleResolution": "node",
     "strict": true,

@@ -7,7 +7,7 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 @Resolver()
-export class UserResolver {
+export class ProfileResolver {
   @Query((returns) => [Profile])
   async profiles() {
     const profiles = await prisma.profile.findMany();

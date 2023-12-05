@@ -12,17 +12,14 @@ import compression from "compression";
 import dotenv from "dotenv";
 import path from "path";
 
-async function startApolloServer(prot: number): Promise<ApolloServer> {
+import getSchema from "./schema"
+
+async function startApolloServer(port: number): Promise<ApolloServer> {
   const app = express();
   app.use(morgan("dev"));
   app.use(compression());
 
-  const schema = await buildSchema({
-    resolvers: [`${__dirname}/**/*.resolver.js`, `${__dirname}/**/*.js`],
-    validate: true,
-  });
-
-
+  const schema = await getSchema()
   const httpServer = http.createServer(app);
   const server = new ApolloServer({
     schema,
@@ -45,11 +42,6 @@ async function startApolloServer(prot: number): Promise<ApolloServer> {
 
   return server;
 }
-
-const isProduction: boolean = process.env.NODE_ENV === "production";
-dotenv.config({
-  path: path.join(__dirname, isProduction ? "../.env.prod" : "../.env"),
-});
 
 const port = parseInt(process.env.SERVER_PORT || "3000");
 startApolloServer(port);

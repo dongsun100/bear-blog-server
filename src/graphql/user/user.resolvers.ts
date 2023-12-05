@@ -3,8 +3,9 @@ import { Arg, Query, Resolver, Mutation } from "type-graphql";
 // import { User } from "@src/graphql/user/User";
 import { User } from "./user";
 
-import { PrismaClient } from "@prisma/client";
-const prisma = new PrismaClient();
+
+import { PrismaClient } from '@prisma/client'
+const prisma = new PrismaClient()
 
 @Resolver()
 export class UserResolver {
@@ -12,7 +13,6 @@ export class UserResolver {
   async users() {
     const users = await prisma.user.findMany();
     console.log(users);
-
     return users;
   }
 
