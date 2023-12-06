@@ -1,0 +1,34 @@
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /home/ubuntu/code-deploy/bear-blog-server
+    file_exists_behavior: OVERWRITE
+
+permissions:
+  - object: /home/ubuntu/code-deploy/bear-blog-server
+    pattern: '**'
+    mode: 750
+    owner: ubuntu
+    group: ubuntu
+
+hooks:
+  ApplicationStop:
+    - location: deploy-script/application-stop.sh
+      timeout: 3600
+      runas: ubuntu
+
+  BeforeInstall:
+    - location: deploy-script/before-install.sh
+      timeout: 3600
+      runas: ubuntu
+
+  AfterInstall:
+    - location: deploy-script/after-install.sh
+      timeout: 3600
+      runas: ubuntu
+
+  ApplicationStart:
+    - location: deploy-script/application-start.sh
+      timeout: 3600
+      runas: ubuntu

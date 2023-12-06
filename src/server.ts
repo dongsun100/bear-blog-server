@@ -1,5 +1,4 @@
 import "reflect-metadata";
-import { buildSchema } from "type-graphql";
 import { ApolloServer } from "apollo-server-express";
 import {
   ApolloServerPluginDrainHttpServer,
@@ -9,8 +8,7 @@ import express from "express";
 import http from "http";
 import morgan from "morgan";
 import compression from "compression";
-import dotenv from "dotenv";
-import path from "path";
+import { Server as SocketServer } from "socket.io"
 
 import getSchema from "./schema"
 
@@ -43,5 +41,16 @@ async function startApolloServer(port: number): Promise<ApolloServer> {
   return server;
 }
 
+function listenStopApolloServer() {
+  const io = new SocketServer(3000)
+  io.on("connection", (socket) => {
+    socket.on("npm-stop", () => {
+      process.exit(0)
+    })
+  })
+}
+
+
 const port = parseInt(process.env.SERVER_PORT || "3000");
 startApolloServer(port);
+listenStopApolloServer()

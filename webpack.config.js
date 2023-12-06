@@ -9,7 +9,15 @@ module.exports = (env) => {
     return {
         target: 'node',
         mode: env.mode,
-        entry: "./src/server.ts",
+        entry: {
+            server: "./src/server.ts",
+            server_stop:"./src/server.stop.ts",
+        },
+        output: {
+            filename: '[name].js',
+            path: path.resolve(__dirname, "bin"),
+            clean: true,
+        },
         devtool: isProduction ? false: "inline-source-map",
         module: {
             rules: [
@@ -17,6 +25,11 @@ module.exports = (env) => {
                     test: /\.tsx?$/,
                     use: "ts-loader",
                     exclude: /node_modules/,
+                },
+                {
+                    test:/\.js$/,
+                    exclude : /node_modules/,
+                    use:'babel-loader',
                 },
             ],
         },
@@ -28,14 +41,20 @@ module.exports = (env) => {
         resolve: {
             extensions: [".mjs", ".tsx", ".ts", ".js"],
         },
-        output: {
-            filename: "server.js",
-            path: path.resolve(__dirname, "dist"),
-        },
+
         externalsPresets: { node: true },
         externals: [nodeExternals()], 
         optimization: {
-            minimize: false
+            minimize: false,
+            splitChunks: {
+                cacheGroups: {
+                    vendors: {
+                        chunks: 'initial',
+                        name: 'vendor',
+                        enforce: true,
+                    },
+                }
+            }
         }
     }
 }

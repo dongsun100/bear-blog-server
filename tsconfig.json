@@ -3,7 +3,7 @@
     "target": "es6",
     "module": "commonjs",
     "lib": ["esnext", "es6"],
-    "outDir": "./dist",
+    "outDir": "./bin",
     "rootDir": "src",
     "moduleResolution": "node",
     "strict": true,
@@ -12,5 +12,5 @@
     "emitDecoratorMetadata": true,
   },
   "exclude": ["node_modules"],
-  "include": ["./src/**/*.tsx", "./src/**/*.ts"],
+  "include": ["./src/**/*.tsx", "./src/**/*.ts", "src/server.stop.js"],
 }
