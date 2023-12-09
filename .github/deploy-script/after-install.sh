@@ -5,6 +5,8 @@ echo "$(date '+%d/%m/%Y %H:%M:%S') [AfterInstall]을 시작 합니다." >> /home
 
 cd /home/ubuntu/code-deploy/bear-blog-server
 
+npm install -g yarn
+
 yarn install
 
 npx prisma generate
