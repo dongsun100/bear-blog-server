@@ -64,6 +64,15 @@ jobs:
       with:
         name: bear-blog-server-prod
 
+
+    - name: set env
+      working-directory: ./
+      run: |
+        pwd
+        touch .env
+        echo DATABASE_URL=${{ secrets.DATABASE_URL }} >> .env
+        cat .env
+
     - name: 📦 Zip project files
       run: zip -r ./$GITHUB_SHA.zip .
   
