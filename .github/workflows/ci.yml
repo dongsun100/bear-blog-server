@@ -64,7 +64,6 @@ jobs:
       with:
         name: bear-blog-server-prod
 
-
     - name: set env
       working-directory: ./
       run: |
