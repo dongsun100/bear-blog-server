@@ -52,7 +52,6 @@ jobs:
       
   deploy:
     env:
-      ENV_PATH: .env
       S3_BUCKET_DIR_NAME: server/production
       DEPLOYMENT_GROUP_NAME: production
     needs: build
