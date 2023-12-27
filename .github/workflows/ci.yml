@@ -9,7 +9,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
         node-version: [18.x]
@@ -49,6 +48,7 @@ jobs:
       with:
         name: bear-blog-server-prod
         path: ./dist/          
+
       
   deploy:
     env:
